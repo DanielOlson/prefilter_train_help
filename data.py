@@ -127,8 +127,8 @@ class SequenceDB:
             q_start = max(s1.q_start, s2.q_start)
             q_end = min(s1.q_end, s2.q_end)
 
-            s1.start += s1.q_start - q_start
-            s2.start += s2.q_start - q_start
+            s1.start += q_start - s1.q_start
+            s2.start += q_start - s2.q_start
 
             s1.end -= s1.q_end - q_end
             s2.end -= s2.q_end - q_end
