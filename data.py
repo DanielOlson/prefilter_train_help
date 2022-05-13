@@ -161,6 +161,7 @@ class SequenceDB:
             file = open(dir + "/" + "pdump.sh", 'w')
             for i in range(len(self.A_seqs)):
                 file.write(pdump + " " + dir + "/A_" + str(i) + ".fa " + dir + "/B_" + str(i) + ".fa > " + dir + "/P_" + str(i) + ".txt\n")
+            file.write("echo done > " + dir + "/done.done\n")
             file.close()
 
     def read_posteriors(self, dir):
