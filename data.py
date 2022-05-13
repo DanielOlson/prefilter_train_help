@@ -183,17 +183,3 @@ class SequenceDB:
             mat = mat - 2.0
 
             self.matrices[i] = torch.sigmoid(mat)
-
-        def posteriors_to_targets(self):
-            s1 = self.A_seqs[i]
-            s2 = self.B_seqs[i]
-            mat = self.matrices[i][s2.start:s2.end, s1.start:s1.end]
-
-            mean = torch.mean(mat, dim=1)
-            std = torch.std(mat, dim=1)
-
-            mat = (mat.T - mean).T
-            mat = (mat.T / std).T
-            mat = mat - 1.5
-
-            self.matrices[i] = torch.sigmoid(mat)
