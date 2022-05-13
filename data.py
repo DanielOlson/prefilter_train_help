@@ -104,8 +104,9 @@ class SequenceDB:
                     seqA = ""
                     seqB = ""
 
-                    headerA = lines_A[i].strip()
-                    headerB = lines_B[i].strip()
+                headerA = lines_A[i].strip()
+                headerB = lines_B[i].strip()
+
             else:
                 seqA = lines_A[i].strip()
                 seqB = lines_B[i].strip()
