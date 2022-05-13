@@ -31,6 +31,13 @@ class Sequence:
         f.write(self.seq + "\n")
         f.close()
 
+    def random_subrange(self, window_size):
+        if (self.end - self.start) > window_size:
+            diff = (self.end - self.start) - window_size
+            self.start += np.random.randint(0, diff)
+            self.end = self.start + window_size
+
+
 def read_posterior_file(file_path):
     matrix = []
     with open(file_path, 'r') as file:
@@ -147,8 +154,8 @@ class SequenceDB:
         newSeqDB = SequenceDB(None, None)
 
         for i in seqs:
-            newSeqDB.A_seqs.append(self.A_seqs[i])
-            newSeqDB.B_seqs.append(self.B_seqs[i])
+            newSeqDB.A_seqs.append(self.A_seqs[i].copy())
+            newSeqDB.B_seqs.append(self.B_seqs[i].copy())
 
         return newSeqDB
 
@@ -183,3 +190,41 @@ class SequenceDB:
             mat = mat - 2.0
 
             self.matrices[i] = torch.sigmoid(mat)
+
+amino_n_to_a = [c for c in 'ARNDCQEGHILKMFPSTWYVBZXJ*']
+amino_a_to_n = {c: i for i, c in enumerate('ARNDCQEGHILKMFPSTWYVBZXJ*')}
+amino_frequencies = torch.tensor([0.074,
+                                  0.042,
+                                  0.044,
+                                  0.059,
+                                  0.033,
+                                  0.058,
+                                  0.037,
+                                  0.074,
+                                  0.029,
+                                  0.038,
+                                  0.076,
+                                  0.072,
+                                  0.018,
+                                  0.040,
+                                  0.050,
+                                  0.081,
+                                  0.062,
+                                  0.013,
+                                  0.033,
+                                  0.068])
+amino_n_to_v = torch.zeros(len(amino_a_to_n), 20)
+for i in range(20):
+    amino_n_to_v[i,i] = 1.0
+
+amino_n_to_v[amino_a_to_n['B'],amino_a_to_n['D']] = 0.5
+amino_n_to_v[amino_a_to_n['B'],amino_a_to_n['N']] = 0.5
+
+amino_n_to_v[amino_a_to_n['Z'],amino_a_to_n['I']] = 0.5
+amino_n_to_v[amino_a_to_n['Z'],amino_a_to_n['J']] = 0.5
+
+amino_n_to_v[amino_a_to_n['J'],amino_a_to_n['I']] = 0.5
+amino_n_to_v[amino_a_to_n['J'],amino_a_to_n['L']] = 0.5
+
+amino_n_to_v[amino_a_to_n['X']] = amino_frequencies
+amino_n_to_v[amino_a_to_n['*']] = amino_frequencies
