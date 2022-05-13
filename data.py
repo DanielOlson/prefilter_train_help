@@ -160,7 +160,7 @@ class SequenceDB:
         if pdump != None:
             file = open(dir + "/" + "pdump.sh", 'w')
             for i in range(len(self.A_seqs)):
-                file.write(pdump + " " + dir + "/A_" + str(i) + ".fa " + dir + "/B_" + str(i) + ".fa > P_" + str(i) + ".txt\n")
+                file.write(pdump + " " + dir + "/A_" + str(i) + ".fa " + dir + "/B_" + str(i) + ".fa > " + dir + "/P_" + str(i) + ".txt\n")
             file.close()
 
     def read_posteriors(self, dir):
