@@ -179,7 +179,7 @@ class SequenceDB:
             mat = torch.sigmoid(mat) * 4.5
             mat = torch.softmax(mat, dim=1)
             mat = nn.functional.normalize(mat, dim=1)
-            mat = torch.sigmoid((mat - 0.15) * 20)
+            mat = torch.sigmoid((mat - 0.15) * 35)
 
             self.matrices[i] = mat.detach()
 
