@@ -4,6 +4,7 @@ import sys
 import numpy as np
 import torch
 import torch.nn as nn
+import re
 
 class Sequence:
     def __init__(self, header, seq):
@@ -181,9 +182,4 @@ class SequenceDB:
             mat = torch.sigmoid((mat - 0.15) * 20)
 
             self.matrices[i] = mat.detach()
-
-
-
-
-
 
