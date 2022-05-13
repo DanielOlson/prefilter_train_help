@@ -130,8 +130,8 @@ class SequenceDB:
             s1.start += s1.q_start - q_start
             s2.start += s2.q_start - q_start
 
-            s1.end += s1.q_end - q_end
-            s2.end += s2.q_end - q_end
+            s1.end -= s1.q_end - q_end
+            s2.end -= s2.q_end - q_end
 
             if s1.end - s1.start > min_len:
                 if s2.end - s2.start > min_len:
