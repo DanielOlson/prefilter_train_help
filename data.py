@@ -174,12 +174,12 @@ class SequenceDB:
             s1 = self.A_seqs[i]
             s2 = self.B_seqs[i]
             mat = self.matrices[i][s2.start:s2.end, s1.start:s1.end]
-            mat = nn.functional.normalize(mat, dim=1)
 
-            mat = torch.sigmoid(mat) * 4.5
-            mat = torch.softmax(mat, dim=1)
-            mat = nn.functional.normalize(mat, dim=1)
-            mat = torch.sigmoid((mat - 0.15) * 35)
+            mean = torch.mean(mat, dim=1)
+            std = torch.std(mat, dim=1)
 
-            self.matrices[i] = mat.detach()
+            mat = (mat.T - mean).T
+            mat = (mat.T / std).T
+            mat = mat - 1.5
+            self.matrices[i] = torch.sigmoid(mat)
 
