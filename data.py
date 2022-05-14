@@ -154,8 +154,8 @@ class SequenceDB:
         newSeqDB = SequenceDB(None, None)
 
         for i in seqs:
-            newSeqDB.A_seqs.append(self.A_seqs[i].copy())
-            newSeqDB.B_seqs.append(self.B_seqs[i].copy())
+            newSeqDB.A_seqs.append(self.A_seqs[i])
+            newSeqDB.B_seqs.append(self.B_seqs[i])
 
         return newSeqDB
 
@@ -213,6 +213,8 @@ amino_frequencies = torch.tensor([0.074,
                                   0.013,
                                   0.033,
                                   0.068])
+
+
 amino_n_to_v = torch.zeros(len(amino_n_to_a), 20)
 for i in range(20):
     amino_n_to_v[i,i] = 1.0
