@@ -28,7 +28,7 @@ class Sequence:
     def write_to_file(self, file):
         f = open(file, 'w')
         f.write(self.header + "\n")
-        f.write(self.seq + "\n")
+        f.write(self.seq[self.start:self.end] + "\n")
         f.close()
 
     def random_subrange(self, window_size):
@@ -180,7 +180,7 @@ class SequenceDB:
         for i in range(len(self.matrices)):
             s1 = self.A_seqs[i]
             s2 = self.B_seqs[i]
-            mat = self.matrices[i][s2.start:s2.end, s1.start:s1.end]
+            mat = self.matrices[i]#[s2.start:s2.end, s1.start:s1.end]
 
             mean = torch.mean(mat, dim=1)
             std = torch.std(mat, dim=1)
@@ -195,7 +195,7 @@ class SequenceDB:
         for i in range(len(self.matrices)):
             s1 = self.A_seqs[i]
             s2 = self.B_seqs[i]
-            mat = self.matrices[i][s2.start:s2.end, s1.start:s1.end]
+            mat = self.matrices[i]#[s2.start:s2.end, s1.start:s1.end]
             mat[mat > pivot] *= mul
 
             self.matrices[i] = torch.softmax(mat, dim=1)
