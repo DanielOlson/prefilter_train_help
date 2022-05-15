@@ -174,7 +174,7 @@ class SequenceDB:
 
     def read_posteriors(self, dir):
         for i in range(len(self.A_seqs)):
-            self.matrices.append(read_posterior_file(dir + "/P_" + str(i) + ".txt"))
+            self.matrices.append(read_posterior_file(dir + "/P_" + str(i) + ".txt"))[1:][1:-5]
 
     def posteriors_to_targets(self):
         for i in range(len(self.matrices)):
