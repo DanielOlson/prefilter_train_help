@@ -191,6 +191,14 @@ class SequenceDB:
 
             self.matrices[i] = torch.sigmoid(mat)
 
+    def posteriors_to_probabilities(self, pivot=-25, mul=0.05):
+        for i in range(len(self.matrices)):
+            s1 = self.A_seqs[i]
+            s2 = self.B_seqs[i]
+            mat = self.matrices[i][s2.start:s2.end, s1.start:s1.end]
+            mat[mat > pivot] *= mul
+            self.matrices[i] = mat
+
 amino_n_to_a = [c for c in 'ARNDCQEGHILKMFPSTWYVBZXJ*']
 amino_a_to_n = {c: i for i, c in enumerate('ARNDCQEGHILKMFPSTWYVBZXJ*')}
 amino_frequencies = torch.tensor([0.074,
