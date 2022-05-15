@@ -197,7 +197,8 @@ class SequenceDB:
             s2 = self.B_seqs[i]
             mat = self.matrices[i][s2.start:s2.end, s1.start:s1.end]
             mat[mat > pivot] *= mul
-            self.matrices[i] = mat
+
+            self.matrices[i] = torch.softmax(mat, dim=1)
 
 amino_n_to_a = [c for c in 'ARNDCQEGHILKMFPSTWYVBZXJ*']
 amino_a_to_n = {c: i for i, c in enumerate('ARNDCQEGHILKMFPSTWYVBZXJ*')}
