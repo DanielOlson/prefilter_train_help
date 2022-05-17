@@ -72,7 +72,7 @@ def read_posterior_file(file_path):
                     matrix.append(row)
                 read_line_count += 1
 
-    return torch.tensor(matrix)[1:,1:-5]
+    return torch.tensor(matrix)[1:,1:]
 
 class SequenceDB:
     def __init__(self, file_path_A, file_path_B):
