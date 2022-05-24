@@ -241,7 +241,7 @@ amino_n_to_v[amino_a_to_n['X']] = amino_frequencies
 amino_n_to_v[amino_a_to_n['*']] = amino_frequencies
 amino_n_to_v[amino_a_to_n['U']] = amino_frequencies
 
-amino_a_to_v = {{c: amino_n_to_v[i] for i, c in enumerate('ARNDCQEGHILKMFPSTWYVBZXJ*U')}}
+amino_a_to_v = {c: amino_n_to_v[i] for i, c in enumerate('ARNDCQEGHILKMFPSTWYVBZXJ*U')}
 
 def tensor_for_sequence(sequence):
     data = torch.zeros(20, len(sequence))
