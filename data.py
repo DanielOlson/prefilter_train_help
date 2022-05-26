@@ -246,5 +246,5 @@ amino_a_to_v = {c: amino_n_to_v[i] for i, c in enumerate('ARNDCQEGHILKMFPSTWYVBZ
 def tensor_for_sequence(sequence):
     data = torch.zeros(20, len(sequence))
     for i, c in enumerate(sequence):
-        data[:,i] = amino_a_to_n[c]
+        data[:,i] = amino_a_to_v[c]
     return data
