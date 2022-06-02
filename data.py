@@ -140,8 +140,8 @@ class SequenceDB:
             s1.end -= s1.q_end - q_end
             s2.end -= s2.q_end - q_end
 
-            if s1.end - s1.start > min_len:
-                if s2.end - s2.start > min_len:
+            if s1.end - s1.start > min_len and len(s1.seq) >= s1.end:
+                if s2.end - s2.start > min_len and len(s2.seq) >= s2.end:
                     A_seqs.append(s1)
                     B_seqs.append(s2)
 
